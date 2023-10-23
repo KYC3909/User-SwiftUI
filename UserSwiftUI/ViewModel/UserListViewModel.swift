@@ -17,6 +17,8 @@ class UserListViewModel:ObservableObject{
     
     private(set) var persistanceUserCoreDataServiceManager: PersistanceUserCoreDataServiceManager
     
+    private(set) var editingMode = false
+
     @Published var name = ""
     @Published var email = ""
     @Published var phone = ""
@@ -56,6 +58,12 @@ extension UserListViewModel: UserListViewModelProtocol {
         _ = phoneValidator.validate(phone)
     }
     
+    // Set Editing or Adding User Item to Database
+    /// `Method Dependency Injection`
+    func enableEditing(_ editMode: Bool) {
+        editingMode = editMode
+    }
+    
     // Reset all fields
     func reset() {
         name = ""
@@ -70,7 +78,8 @@ extension UserListViewModel: UserListViewModelProtocol {
     // Create or Edit User Method and
     // passed responsibility to `PersistanceUserCoreDataServiceManager`
     func createUser(){
-        if userItem == nil {
+
+        if !editingMode {
 //            let user = User(context: context)
 //            user.id = UUID()
 //            user.name = name

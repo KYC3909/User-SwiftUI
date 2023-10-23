@@ -29,6 +29,7 @@ struct UsersListView: View {
             .toolbar{
                 Button(action: {
                     // Toogle to Open User Creation View
+                    userListVM.enableEditing(false)
                     userListVM.reset()
                     addView.toggle()
                 }, label: {

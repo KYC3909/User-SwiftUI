@@ -19,6 +19,7 @@ struct UserView: View {
         
         Button {
             // Editing View
+            userListViewModel.enableEditing(true)
             userListViewModel.reset()
             userListViewModel.userItem = user
             isEdit.toggle()
@@ -76,6 +77,7 @@ struct UserView: View {
             
             /// Swipe Action to ``Edit``
             Button(action: {
+                userListViewModel.enableEditing(true)
                 userListViewModel.reset()
                 userListViewModel.userItem = user
                 isEdit.toggle()
